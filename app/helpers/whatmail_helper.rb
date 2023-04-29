@@ -1,0 +1,2 @@
+module WhatmailHelper
+end

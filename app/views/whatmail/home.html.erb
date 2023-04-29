@@ -1,0 +1,19 @@
+<h1> Hi, there. Welcome to Whatmail </h1>
+<% if current_user %>
+<h2><%= current_user.email %></h2>
+  <%= image_tag(current_user.avatar_url) %>
+  <% if current_user.phone_number %>
+    <p>Your phone number is: <%= current_user.phone.number %></p>
+  <% else %>
+    <%= form_for(current_user.build_phone_number) do |f| %>
+      <%= f.label :number %>
+      <%= f.text_field :number %>
+      <%= f.submit "Save Phone Number" %>
+    <% end %>
+  <% end %>
+  <%= link_to "Edit Account", edit_user_registration_path %>
+  <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+<% else %>
+  <%= link_to "Login", new_user_session_path %>
+  <%= link_to "Create Account", new_user_registration_path %>
+<% end %>
